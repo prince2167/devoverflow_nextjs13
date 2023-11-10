@@ -1,17 +1,17 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { SignedOut } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
+import { sidebarLinks } from "@/constants";
+import { usePathname } from "next/navigation";
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
   SheetClose,
 } from "@/components/ui/sheet";
-import Link from "next/link";
-import { SignedOut } from "@clerk/nextjs";
-import { Button } from "@/components/ui/button";
-import { sidebarLinks } from "@/constants";
-import { usePathname } from "next/navigation";
 
 const NavContent = () => {
   const pathname = usePathname();
@@ -77,7 +77,7 @@ const MobileNav = () => {
           </p>
         </Link>
 
-        <div>
+        <div className="flex h-full flex-col pb-9">
           <SheetClose asChild>
             <NavContent />
           </SheetClose>
