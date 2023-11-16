@@ -1,9 +1,48 @@
+import QuestionCard from "@/components/cards/QuestionCard";
 import HomeFilters from "@/components/home/HomeFilters";
 import Filter from "@/components/shared/Filter";
+import NoResult from "@/components/shared/NoResult";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/fitlers";
 import Link from "next/link";
+
+const questions = [
+  {
+    _id: "1",
+    title: "Cascading Deletes in SQLAlchemy?",
+    tags: [
+      { _id: "1", name: "python" },
+      { _id: "2", name: "aql" },
+    ],
+    authour: {
+      _id: "1",
+      name: "John Doe",
+      picture: "url/to/picture",
+    },
+    upvotes: 80000,
+    views: 1500000,
+    answer: [{ answerProperty: "value" }], // You might need to specify the structure of the 'answer' object
+    createdAt: new Date("2023-11-01T12:00:00.000Z"),
+  },
+  {
+    _id: "2",
+    title: "How to center a div?",
+    tags: [
+      { _id: "1", name: "css" },
+      { _id: "2", name: "Javascript" },
+    ],
+    authour: {
+      _id: "2",
+      name: "Jane Doe",
+      picture: "url/to/picture",
+    },
+    upvotes: 8,
+    views: 95,
+    answer: [{ answerProperty: "value" }], // You might need to specify the structure of the 'answer' object
+    createdAt: new Date(),
+  },
+];
 
 export default function Home() {
   return (
@@ -34,6 +73,33 @@ export default function Home() {
       </div>
 
       <HomeFilters />
+
+      <div className="mt-10 flex w-full flex-col gap-6">
+        {questions.length > 0 ? (
+          questions.map((question) => (
+            <QuestionCard
+              key={question._id}
+              _id={question._id}
+              title={question.title}
+              tags={question.tags}
+              authour={question.authour}
+              upvotes={question.upvotes}
+              views={question.views}
+              answer={question.answer}
+              createdAt={question.createdAt}
+            />
+          ))
+        ) : (
+          <NoResult
+            title="There are no questions to show"
+            description="Be the first to break the silence! 🚀 Ask a Question and kickstart the
+          discussion. our query could be the next big thing others learn from. Get
+          involved! 💡"
+            link="/ask-questions"
+            linkTitle="Ask a Question"
+          />
+        )}
+      </div>
     </>
   );
 }
