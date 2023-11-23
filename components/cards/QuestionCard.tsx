@@ -8,24 +8,24 @@ interface QuestionProps {
   _id: string;
   title: string;
   tags: { _id: string; name: string }[];
-  authour: {
+  author: {
     _id: string;
     name: string;
     picture: string;
   };
   upvotes: number;
   views: number;
-  answer: Array<object>;
+  answers: Array<object>;
   createdAt: Date;
 }
 const QuestionCard = ({
   _id,
   title,
   tags,
-  authour,
+  author,
   upvotes,
   views,
-  answer,
+  answers,
   createdAt,
 }: QuestionProps) => {
   return (
@@ -55,10 +55,10 @@ const QuestionCard = ({
         <Matric
           imageUrl="/assets/icons/avatar.svg"
           alt="user"
-          value={authour.name}
+          value={author.name}
           title={` - asked ${getTimeStamp(createdAt)}`}
           isAuthor
-          href={`/profile/${authour._id}`}
+          href={`/profile/${author._id}`}
           textStyle="body-medium text-dark400_light800"
         />
 
@@ -72,7 +72,7 @@ const QuestionCard = ({
         <Matric
           imageUrl="/assets/icons/message.svg"
           alt="message"
-          value={formatAndDivideNumber(answer.length)}
+          value={formatAndDivideNumber(answers.length)}
           title="Answers"
           textStyle="small-medium text-dark400_light800"
         />
