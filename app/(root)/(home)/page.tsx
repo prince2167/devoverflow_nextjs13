@@ -9,7 +9,10 @@ import { getQuestions } from "@/lib/actions/question.action";
 import Link from "next/link";
 
 export default async function Home() {
-  const result = await getQuestions({});
+  const result = await getQuestions({
+    page: 0,
+    pageSize: 0,
+  });
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:-items-center">
