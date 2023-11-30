@@ -23,6 +23,7 @@ export async function getUserById(params: any) {
         throw error
     }
 }
+
 export async function createUser(userData: CreateUserParams) {
     try {
         connectToDatabase()
@@ -160,6 +161,9 @@ export async function getSavedQuestions(params: GetSavedQuestionsParams) {
         throw error
     }
 }
+
+
+
 
 
 // export async function getAllUsers(params: GetAllUsersParams) {
