@@ -1,6 +1,6 @@
 import Answer from "@/components/forms/Answer";
 import AllAnswers from "@/components/shared/AllAnswers";
-import Matric from "@/components/shared/Matric";
+import Metric from "@/components/shared/Metric";
 import ParseHTML from "@/components/shared/ParseHTML";
 import RenderTag from "@/components/shared/RenderTag";
 import Votes from "@/components/shared/Votes";
@@ -10,7 +10,6 @@ import { formatAndDivideNumber, getTimeStamp } from "@/lib/utils";
 import { auth } from "@clerk/nextjs";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 const Page = async ({ params }) => {
   const result = await getQuestionById({ questionId: params.id });
@@ -58,21 +57,21 @@ const Page = async ({ params }) => {
       </div>
 
       <div className="mb-8 mt-5 flex flex-wrap gap-4">
-        <Matric
+        <Metric
           imageUrl="/assets/icons/clock.svg"
           alt="Clock"
           value={`asked ${getTimeStamp(result.createdAt)}`}
           title="Asked"
           textStyle="small-medium text-dark400_light800"
         />
-        <Matric
+        <Metric
           imageUrl="/assets/icons/message.svg"
           alt="message"
           value={formatAndDivideNumber(result.answers.length)}
           title="Answers"
           textStyle="small-medium text-dark400_light800"
         />
-        <Matric
+        <Metric
           imageUrl="/assets/icons/eye.svg"
           alt="eye"
           value={formatAndDivideNumber(result.views)}

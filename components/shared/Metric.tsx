@@ -11,7 +11,7 @@ interface MetricProps {
   textStyle?: string;
   isAuthor?: boolean;
 }
-const Matric = ({
+const Metric = ({
   imageUrl,
   alt,
   value,
@@ -20,7 +20,7 @@ const Matric = ({
   textStyle,
   isAuthor,
 }: MetricProps) => {
-  const matricContent = (
+  const metricContent = (
     <>
       <Image
         src={imageUrl}
@@ -45,11 +45,11 @@ const Matric = ({
   if (href) {
     return (
       <Link href={href} className="flex-center gap-1">
-        {matricContent}
+        {metricContent}
       </Link>
     );
   }
-  return <div className="flex-center flex-wrap gap-1">{matricContent}</div>;
+  return <div className="flex-center flex-wrap gap-1">{metricContent}</div>;
 };
 
-export default Matric;
+export default Metric;
