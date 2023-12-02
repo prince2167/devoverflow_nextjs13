@@ -4,7 +4,7 @@ import { FilterQuery } from "mongoose";
 import User from "@/database/user.model";
 import Tag from "@/database/tag.model";
 import { connectToDatabase } from "../mongoose";
-import { CreateUserParams, DeleteUserParams, GetAllUsersParams, GetSavedQuestionsParams, GetUserByIdParams, GetUserByIdParams, GetUserStatsParams, ToggleSaveQuestionParams, UpdateUserParams } from "./shared.types";
+import { CreateUserParams, DeleteUserParams, GetAllUsersParams, GetSavedQuestionsParams, GetUserByIdParams, GetUserStatsParams, ToggleSaveQuestionParams, UpdateUserParams } from "./shared.types";
 import { revalidatePath } from "next/cache";
 import Question from "@/database/question.model";
 import Answer from "@/database/answer.model";
@@ -228,6 +228,8 @@ export async function getUserAnswers(params: GetUserStatsParams) {
         throw error
     }
 }
+
+
 
 
 // export async function getAllUsers(params: GetAllUsersParams) {
