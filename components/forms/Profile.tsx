@@ -51,7 +51,7 @@ const Profile = ({ clerkId, user }: Props) => {
         username: values.username,
         portfolioWebsite: values.portfolioWebsite,
         location: values.location,
-        bio: values.location,
+        bio: values.bio,
       },
       path: pathname,
     });
