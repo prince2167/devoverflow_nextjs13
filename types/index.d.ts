@@ -78,3 +78,4 @@ export interface QuestionData {
     answers: Array<object>;
     createdAt: string;
 }
+

@@ -93,8 +93,16 @@ export async function createQuestion(params: CreateQuestionParams) {
 
 
         // create an interaction record for the user's asK_question action
+        await Interaction.create({
+            user: author,
+            action: "ask_question",
+            question: question._id,
+            tags: tagDocuments
+        })
 
         // Increment author's reputation by +5 for creating a question
+        await User.findByIdAndUpdate(author, { $inc: { reputation: 5 } })
+
         revalidatePath(path)
     } catch (error) {
         console.log(error);
@@ -139,7 +147,11 @@ export async function upvoteQuestion(params: QuestionVoteParams) {
         if (!question) {
             throw new Error("Question not found")
         }
-        // Increment author reputation by +10 for upvoting a question
+        // Increment author reputation by +1/-1 for upvoting/revoking an upvote to the question
+        await User.findByIdAndUpdate(userId, { $inc: { reputation: hasupVoted ? -1 : 1 } })
+
+        // Increment author reputation by +10/-10 for upvote/downvote for reciving an upvote/downvote to the question
+        await User.findByIdAndUpdate(userId, { $inc: { reputation: hasupVoted ? -10 : 10 } })
 
         revalidatePath(path)
 
@@ -171,7 +183,13 @@ export async function downvoteQuestion(params: QuestionVoteParams) {
         if (!question) {
             throw new Error("Question not found")
         }
-        // Increment author reputation by +10 for upvoting a question
+
+        // Increment author reputation 
+        await User.findByIdAndUpdate(userId, { $inc: { reputation: hasdownVoted ? -2 : 2 } })
+
+        // reciving reputation
+        await User.findByIdAndUpdate(question.author, { $inc: { reputation: hasdownVoted ? -10 : 10 } })
+
 
         revalidatePath(path)
 
