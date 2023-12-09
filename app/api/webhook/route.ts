@@ -66,7 +66,7 @@ export async function POST(req: Request) {
             picture: image_url
         })
 
-        return NextResponse.json({ message: "ok", user: mongoUser })
+        return NextResponse.json({ message: "Ok", user: mongoUser })
     }
 
     if (eventType === "user.updated") {
@@ -83,7 +83,7 @@ export async function POST(req: Request) {
             path: `/profile/${id}`
         })
 
-        return NextResponse.json({ message: "ok", user: mongoUser })
+        return NextResponse.json({ message: "Ok", user: mongoUser })
     }
 
     if (eventType === "user.deleted") {
@@ -92,8 +92,8 @@ export async function POST(req: Request) {
             clerkId: id!
         })
 
-        return NextResponse.json({ message: "ok", user: deletedUser })
+        return NextResponse.json({ message: "Ok", user: deletedUser })
     }
 
-    return new Response('', { status: 201 })
+    return NextResponse.json({ message: "Ok" })
 }
