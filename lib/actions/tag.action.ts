@@ -8,11 +8,10 @@ import { FilterQuery } from "mongoose"
 import Question from "@/database/question.model"
 
 
-
 export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
     try {
         connectToDatabase()
-        const { userId } = params
+        const { userId, limit = 3 } = params
 
         const user = await User.findById(userId)
 
@@ -21,7 +20,21 @@ export async function getTopInteractedTags(params: GetTopInteractedTagsParams) {
         // find interactions for the user and group by tags...
         // interaction
 
-        return [{ _id: "1", name: "tag1" }, { _id: "2", name: "tag2" }, { _id: "3", name: "tag3" }]
+        const interactions = await Question.aggregate([
+            { $match: { author: userId } },
+            { $unwind: "$tags" },
+            { $group: { _id: "$tags", count: { $sum: 1 } } },
+            { $sort: { count: -1 } },
+            { $limit: limit },
+        ]);
+
+        // find the tags from the interactions
+        const tags = await Tag.find({
+            _id: { $in: interactions.map((i) => i._id) },
+        });
+
+
+        return tags;
     } catch (error) {
         console.log(error)
         throw error
